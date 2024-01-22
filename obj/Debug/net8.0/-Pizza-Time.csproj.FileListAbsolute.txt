@@ -1,0 +1,15 @@
+C:\дз\дз 2 курс\ооп2\Pizza-Time\-Pizza-Time\bin\Debug\net8.0\-Pizza-Time.exe
+C:\дз\дз 2 курс\ооп2\Pizza-Time\-Pizza-Time\bin\Debug\net8.0\-Pizza-Time.deps.json
+C:\дз\дз 2 курс\ооп2\Pizza-Time\-Pizza-Time\bin\Debug\net8.0\-Pizza-Time.runtimeconfig.json
+C:\дз\дз 2 курс\ооп2\Pizza-Time\-Pizza-Time\bin\Debug\net8.0\-Pizza-Time.dll
+C:\дз\дз 2 курс\ооп2\Pizza-Time\-Pizza-Time\bin\Debug\net8.0\-Pizza-Time.pdb
+C:\дз\дз 2 курс\ооп2\Pizza-Time\-Pizza-Time\obj\Debug\net8.0\-Pizza-Time.GeneratedMSBuildEditorConfig.editorconfig
+C:\дз\дз 2 курс\ооп2\Pizza-Time\-Pizza-Time\obj\Debug\net8.0\-Pizza-Time.AssemblyInfoInputs.cache
+C:\дз\дз 2 курс\ооп2\Pizza-Time\-Pizza-Time\obj\Debug\net8.0\-Pizza-Time.AssemblyInfo.cs
+C:\дз\дз 2 курс\ооп2\Pizza-Time\-Pizza-Time\obj\Debug\net8.0\-Pizza-Time.csproj.CoreCompileInputs.cache
+C:\дз\дз 2 курс\ооп2\Pizza-Time\-Pizza-Time\obj\Debug\net8.0\-Pizza-Time.sourcelink.json
+C:\дз\дз 2 курс\ооп2\Pizza-Time\-Pizza-Time\obj\Debug\net8.0\-Pizza-Time.dll
+C:\дз\дз 2 курс\ооп2\Pizza-Time\-Pizza-Time\obj\Debug\net8.0\refint\-Pizza-Time.dll
+C:\дз\дз 2 курс\ооп2\Pizza-Time\-Pizza-Time\obj\Debug\net8.0\-Pizza-Time.pdb
+C:\дз\дз 2 курс\ооп2\Pizza-Time\-Pizza-Time\obj\Debug\net8.0\-Pizza-Time.genruntimeconfig.cache
+C:\дз\дз 2 курс\ооп2\Pizza-Time\-Pizza-Time\obj\Debug\net8.0\ref\-Pizza-Time.dll
