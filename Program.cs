@@ -30,7 +30,7 @@ namespace Pizza_time
         {
             Order order = pizzeria.TakeOrder(this, pizzas);
             OrderNumber = order.OrderNumber;
-            Console.WriteLine($"Заказ успешно размещен. Номер заказа: {OrderNumber}");
+            Console.WriteLine($"Заказ принят. Номер заказа: {OrderNumber}");
         }
 
         public void PickUpOrder(Pizzeria pizzeria)
@@ -111,6 +111,7 @@ namespace Pizza_time
 
                 Console.WriteLine("Выберите пиццы из меню (введите номера через запятую): ");
                 string pizzaChoices = Console.ReadLine();
+                
                 List<int> selectedPizzaIndices = pizzaChoices.Split(',').Select(int.Parse).ToList();
 
                 List<Pizza> selectedPizzas = selectedPizzaIndices
@@ -121,9 +122,9 @@ namespace Pizza_time
                 if (selectedPizzas.Count > 0)
                 {
                     user.PlaceOrder(pizzeria, selectedPizzas);
-                    Console.WriteLine($"Заказ успешно создан.");
+                    Console.WriteLine($"Заказ успешно создан. Итоговая стоимость заказа: {selectedPizzas.Sum(pizza => pizza.Price)}");
 
-                    // Задержка на приготовление пиццы в виде таймера
+                    // Задержка на приготовление пиццы
                     Console.WriteLine("Готовим пиццу...");
                     Thread.Sleep(5000); // Задержка в миллисекундах (в данном случае 5 секунд)
 

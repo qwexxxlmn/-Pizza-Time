@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("-Pizza-Time")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+699203277127ce41974eec5aa827496359e3ef5e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a12aec8a3086acabb57a2aea4e91d4aa6befed16")]
 [assembly: System.Reflection.AssemblyProductAttribute("-Pizza-Time")]
 [assembly: System.Reflection.AssemblyTitleAttribute("-Pizza-Time")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
