@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Pizza_time
 {
@@ -25,18 +24,28 @@ namespace Pizza_time
     // Сущность "Пользователь"
     public class User
     {
-        public string Name { get; set; }
+        public int OrderNumber { get; set; }
 
         public void PlaceOrder(Pizzeria pizzeria, List<Pizza> pizzas)
         {
             Order order = pizzeria.TakeOrder(this, pizzas);
-            Console.WriteLine($"Заказ успешно размещен. Номер заказа: {order.OrderNumber}");
+            OrderNumber = order.OrderNumber;
+            Console.WriteLine($"Заказ успешно размещен. Номер заказа: {OrderNumber}");
         }
 
-        public void PickUpOrder(Pizzeria pizzeria, Order order)
+        public void PickUpOrder(Pizzeria pizzeria)
         {
-            pizzeria.NotifyUser(order);
-            Console.WriteLine($"{Name}забрал заказ. Приятного аппетита!");
+            Order readyOrder = pizzeria.FindOrder(OrderNumber);
+
+            if (readyOrder != null)
+            {
+                pizzeria.NotifyUser(readyOrder);
+                Console.WriteLine($"Заказ №{OrderNumber} забран. Приятного аппетита!");
+            }
+            else
+            {
+                Console.WriteLine($"Заказ №{OrderNumber} не найден.");
+            }
         }
     }
 
@@ -52,13 +61,18 @@ namespace Pizza_time
             Order order = new Order
             {
                 OrderNumber = orderCounter++,
-                UserName = user.Name,
+                UserName = $"Гость",
                 Pizzas = pizzas,
                 IsReady = false
             };
 
             Orders.Add(order);
             return order;
+        }
+
+        public Order FindOrder(int orderNumber)
+        {
+            return Orders.FirstOrDefault(order => order.OrderNumber == orderNumber);
         }
 
         public void NotifyUser(Order order)
@@ -76,48 +90,56 @@ namespace Pizza_time
     {
         static void Main()
         {
-            // Пример использования
             Pizzeria pizzeria = new Pizzeria();
-            User user = new User { Name = "Гость " };
 
-            // Добавим несколько видов пицц для выбора пользователем
-            List<Pizza> menu = new List<Pizza>
+            while (true)
             {
-                new Pizza { Name = "1. Пепперони: ", Price = 549.00},
-                new Pizza { Name = "2. Маргарита: ", Price = 349.49},
-                new Pizza { Name = "3. Гавайская: ", Price = 799.99}
-            };
+                User user = new User();
 
-            Console.WriteLine("Меню: ");
-            foreach (var pizza in menu)
-            {
-                Console.WriteLine($"{pizza.Name} - {pizza.Price:F2}");
+                List<Pizza> menu = new List<Pizza>
+                {
+                    new Pizza { Name = "1. Пепперони: ", Price = 549.00},
+                    new Pizza { Name = "2. Маргарита: ", Price = 349.49},
+                    new Pizza { Name = "3. Гавайская: ", Price = 799.99}
+                };
+
+                Console.WriteLine("Меню: ");
+                foreach (var pizza in menu)
+                {
+                    Console.WriteLine($"{pizza.Name} - {pizza.Price:F2}");
+                }
+
+                Console.WriteLine("Выберите пиццы из меню (введите номера через запятую): ");
+                string pizzaChoices = Console.ReadLine();
+                List<int> selectedPizzaIndices = pizzaChoices.Split(',').Select(int.Parse).ToList();
+
+                List<Pizza> selectedPizzas = selectedPizzaIndices
+                    .Where(index => index > 0 && index <= menu.Count)
+                    .Select(index => menu[index - 1])
+                    .ToList();
+
+                if (selectedPizzas.Count > 0)
+                {
+                    user.PlaceOrder(pizzeria, selectedPizzas);
+                    Console.WriteLine($"Заказ успешно создан.");
+
+                    // Задержка на приготовление пиццы в виде таймера
+                    Console.WriteLine("Готовим пиццу...");
+                    Thread.Sleep(5000); // Задержка в миллисекундах (в данном случае 5 секунд)
+
+                    user.PickUpOrder(pizzeria);
+                }
+                else
+                {
+                    Console.WriteLine("Неверный выбор пиццы.");
+                }
+
+                Console.WriteLine("Желаете разместить еще один заказ? (Y/N)");
+                string continueOrdering = Console.ReadLine();
+
+                if (continueOrdering.ToUpper() != "Y")
+                    break;
             }
-
-            Console.WriteLine("Выберите пиццу из меню (введите номер): ");
-            int pizzaChoice = int.Parse(Console.ReadLine());
-
-            if (pizzaChoice < 1 || pizzaChoice > menu.Count)
-            {
-                Console.WriteLine("Неверный выбор пиццы.");
-                Console.ReadLine();
-                return;
-            }
-
-            Pizza selectedPizza = menu[pizzaChoice - 1];
-
-            List<Pizza> pizzas = new List<Pizza> { selectedPizza };
-
-            user.PlaceOrder(pizzeria, pizzas);
-            Console.WriteLine($"Заказ на {selectedPizza.Name} успешно размещен. Номер заказа: {pizzeria.Orders.Last().OrderNumber}");
-
-            // Задержка на приготовление пиццы в виде таймера
-            Console.WriteLine("Готовим пиццу...");
-            Thread.Sleep(5000); // Задержка в миллисекундах (в данном случае 5 секунд)
-
-            Order readyOrder = pizzeria.Orders.Last();
-            user.PickUpOrder(pizzeria, readyOrder);
-            Console.ReadLine();
         }
     }
 }
