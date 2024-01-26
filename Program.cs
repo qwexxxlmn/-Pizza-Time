@@ -19,6 +19,7 @@ namespace Pizza_time
         public string UserName { get; set; }
         public List<Pizza> Pizzas { get; set; }
         public bool IsReady { get; set; }
+        public bool IsPickedUp { get; set; }
     }
 
     // Сущность "Пользователь"
@@ -83,6 +84,18 @@ namespace Pizza_time
             // Задержка перед тем, как пользователь заберет заказ
             Console.WriteLine("Ожидаем, пока гость заберет заказ...");
             Thread.Sleep(3000); // Задержка в миллисекундах (в данном случае 3 секунды)
+            Console.WriteLine("Гость забрал заказ? (Y/N)"); // Проверка, забрал ли гость заказ
+            string pickedUp = Console.ReadLine();
+
+            if (pickedUp.ToUpper() == "Y")
+            {
+                order.IsPickedUp = true;
+            }
+            else
+            {
+                // Повторный вопрос, если гость не забрал заказ
+                NotifyUser(order);
+            }
         }
     }
 
@@ -111,7 +124,7 @@ namespace Pizza_time
 
                 Console.WriteLine("Выберите пиццы из меню (введите номера через запятую): ");
                 string pizzaChoices = Console.ReadLine();
-                
+
                 List<int> selectedPizzaIndices = pizzaChoices.Split(',').Select(int.Parse).ToList();
 
                 List<Pizza> selectedPizzas = selectedPizzaIndices
